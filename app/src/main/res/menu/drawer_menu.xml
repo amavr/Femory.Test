@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/tasksFragment"
+        android:title="@string/tasks_name"
+        android:icon="@drawable/ic_done_all_black_24dp"/>
+    <item android:id="@+id/usersFragment"
+        android:title="@string/users_name"
+        android:icon="@drawable/ic_done_all_black_24dp"/>
+    <item android:id="@+id/optionsFragment"
+        android:title="@string/options_name"
+        android:icon="@drawable/ic_done_all_black_24dp"/>
+</menu>

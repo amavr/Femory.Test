@@ -37,28 +37,28 @@ public class MainActivity extends AppCompatActivity {
             goToAuth();
         }
 
-        btnTest = (Button)findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Log.d(TAG, "Firebase signout!");
-                FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
-                Log.d(TAG, String.format("Firebase user: %s", gson.toJson(fbu)));
-
-                /// из учетной записи гугл также выход,
-                // чтобы была возможность выбрать другого пользователя
-                GoogleSignInClient gc = (GoogleSignInClient)XMem.getInstance().getGoogleClient();
-                if(gc != null){
-                    gc.signOut();
-                    gc.revokeAccess();
-                }
-
-                /// после выхода на главном экране делать нечего,
-                /// поэтому - на экран авторизации
-                goToAuth();
-            }
-        });
+//        btnTest = (Button)findViewById(R.id.btnTest);
+//        btnTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FirebaseAuth.getInstance().signOut();
+//                Log.d(TAG, "Firebase signout!");
+//                FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
+//                Log.d(TAG, String.format("Firebase user: %s", gson.toJson(fbu)));
+//
+//                /// из учетной записи гугл также выход,
+//                // чтобы была возможность выбрать другого пользователя
+//                GoogleSignInClient gc = (GoogleSignInClient)XMem.getInstance().getGoogleClient();
+//                if(gc != null){
+//                    gc.signOut();
+//                    gc.revokeAccess();
+//                }
+//
+//                /// после выхода на главном экране делать нечего,
+//                /// поэтому - на экран авторизации
+//                goToAuth();
+//            }
+//        });
 
 //        getToken();
     }

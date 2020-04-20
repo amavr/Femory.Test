@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Femory</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tasks_name">Напоминалки</string>
+    <string name="users_name">Пользователи</string>
+    <string name="options_name">Настройки</string>
 </resources>

@@ -2,6 +2,10 @@ package com.amavr.femory;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         if(fbu == null){
             goToAuth();
         }
+
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+//        NavigationUI.setupWithNavController(bottomNav, navController);
 
 //        btnTest = (Button)findViewById(R.id.btnTest);
 //        btnTest.setOnClickListener(new View.OnClickListener() {

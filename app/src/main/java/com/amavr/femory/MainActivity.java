@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.amavr.tools.XMem;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -46,17 +45,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Firebase signout!");
                 FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
                 Log.d(TAG, String.format("Firebase user: %s", gson.toJson(fbu)));
+
+                /// из учетной записи гугл также выход,
+                // чтобы была возможность выбрать другого пользователя
                 GoogleSignInClient gc = (GoogleSignInClient)XMem.getInstance().getGoogleClient();
                 if(gc != null){
                     gc.signOut();
                     gc.revokeAccess();
                 }
+
+                /// после выхода на главном экране делать нечего,
+                /// поэтому - на экран авторизации
                 goToAuth();
-//                Log.d(TAG, token);
             }
         });
 
-        getToken();
+//        getToken();
     }
 
     private void goToAuth(){

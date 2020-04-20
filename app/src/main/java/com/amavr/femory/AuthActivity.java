@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 
+/// активити вызывается из главной формы
 public class AuthActivity extends AppCompatActivity {
 
     final static int SOME_REQUEST_CODE = 123;
@@ -53,27 +54,29 @@ public class AuthActivity extends AppCompatActivity {
             }
         });
 
-
+        /// проверка авторизации происходит по пользователю FB
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser fbu = mAuth.getCurrentUser();
         Log.d(TAG, String.format("Firebase user: %s", fbu));
-        XMem.getInstance().setFirebaseUser(fbu);
 
-        btnSign.setVisibility(fbu == null ? View.VISIBLE : View.INVISIBLE);
+//        btnSign.setVisibility(fbu == null ? View.VISIBLE : View.INVISIBLE);
 
+        /// создание необходимых объектов для авторизация через гугл
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("323447805848-iep77ef5lqm62v5059p6516jq9a1tq0n.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleClient = GoogleSignIn.getClient(this, gso);
+        /// потребуется для выхода из учетной записи гугл
         XMem.getInstance().setGoogleClient(mGoogleClient);
 
-        if (fbu == null) {
-            Log.d(TAG, String.format("FB user: %s", fbu));
-        }
-        else{
-            backToMain();
-        }
+//        ///
+//        if (fbu == null) {
+//            Log.d(TAG, String.format("FB user: %s", fbu));
+//        }
+//        else{
+//            backToMain();
+//        }
     }
 
     private void backToMain() {
@@ -89,25 +92,21 @@ public class AuthActivity extends AppCompatActivity {
             Log.d(TAG, String.format("Google account: %s", accountName));
 //            Log.d(TAG, String.format("Google account: %s", gson.toJson(data)));
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            mGoogleAccount = completedTask.getResult(ApiException.class);
-//            XMem.getInstance().setGoogleAccount(account);
-            Log.d(TAG, String.format("Selected account=%s", mGoogleAccount.getAccount().name));
+            try {
+                mGoogleAccount = task.getResult(ApiException.class);
+                Log.d(TAG, String.format("Selected account=%s", mGoogleAccount.getAccount().name));
 
-            firebaseAuthWithGoogle(mGoogleAccount);
+                firebaseAuthWithGoogle(mGoogleAccount);
 
-            // Signed in successfully, show authenticated UI.
-            backToMain();
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            String msg = String.format("error: %s", gson.toJson(e));
-            Log.w(TAG, msg);
+                // Signed in successfully, show authenticated UI.
+                backToMain();
+            } catch (ApiException e) {
+                // The ApiException status code indicates the detailed failure reason.
+                // Please refer to the GoogleSignInStatusCodes class reference for more information.
+                String msg = String.format("error: %s", gson.toJson(e));
+                Log.w(TAG, msg);
+            }
         }
     }
 

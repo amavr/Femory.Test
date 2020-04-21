@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.amavr.tools.XMem;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -41,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
             goToAuth();
         }
 
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
-//        NavigationUI.setupWithNavController(bottomNav, navController);
+        NavController navController = Navigation.findNavController(this, R.id.navFragment);
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        NavigationUI.setupWithNavController(bottomNav, navController);
 
 //        btnTest = (Button)findViewById(R.id.btnTest);
 //        btnTest.setOnClickListener(new View.OnClickListener() {

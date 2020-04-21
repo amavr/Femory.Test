@@ -2,20 +2,15 @@ package com.amavr.femory;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
-import com.amavr.tools.XMem;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             goToAuth();
         }
 
-        NavController navController = Navigation.findNavController(this, R.id.navFragment);
+        NavController navController = Navigation.findNavController(this, R.id.hostNavFragment);
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         NavigationUI.setupWithNavController(bottomNav, navController);
 

@@ -69,26 +69,26 @@ public class NavFragment extends Fragment {
         View navView = inflater.inflate(R.layout.fragment_nav, container, false);
         nc = NavHostFragment.findNavController(this);
 
-        navView.findViewById(R.id.btnTasks).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nc.navigate(R.id.tasksFragment);
-            }
-        });
-
-        navView.findViewById(R.id.btnUsers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nc.navigate(R.id.usersFragment);
-            }
-        });
-
-        navView.findViewById(R.id.btnOptions).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nc.navigate(R.id.optionsFragment);
-            }
-        });
+//        navView.findViewById(R.id.btnTasks).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                nc.navigate(R.id.tasksFragment);
+//            }
+//        });
+//
+//        navView.findViewById(R.id.btnUsers).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                nc.navigate(R.id.usersFragment);
+//            }
+//        });
+//
+//        navView.findViewById(R.id.btnOptions).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                nc.navigate(R.id.optionsFragment);
+//            }
+//        });
 
         return navView;
     }

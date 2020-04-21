@@ -19,7 +19,7 @@
 <!--        app:layout_constraintVertical_bias="0.023" />-->
 
     <fragment
-        android:id="@+id/navFragment"
+        android:id="@+id/hostNavFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,10 +34,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:animationCache="true"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:itemTextColor="@color/bnv_tab_item_foreground"
+        app:itemIconTint="@color/bnv_tab_item_foreground"
         app:menu="@menu/drawer_menu" />
 
     <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->

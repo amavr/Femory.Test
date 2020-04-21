@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navFragment">
+    app:startDestination="@id/hostNavFragment">
 
     <fragment
-        android:id="@+id/navFragment"
+        android:id="@+id/hostNavFragment"
         android:name="com.amavr.femory.NavFragment"
         android:label="Меню"
         tools:layout="@layout/fragment_nav" >

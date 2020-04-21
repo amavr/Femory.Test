@@ -6,22 +6,22 @@
     android:orientation="vertical"
     tools:context=".NavFragment">
 
-    <Button
-        android:id="@+id/btnTasks"
-        android:text="@string/tasks_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<!--    <Button-->
+<!--        android:id="@+id/btnTasks"-->
+<!--        android:text="@string/tasks_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
-    <Button
-        android:id="@+id/btnUsers"
-        android:text="@string/users_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<!--    <Button-->
+<!--        android:id="@+id/btnUsers"-->
+<!--        android:text="@string/users_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
-    <Button
-        android:id="@+id/btnOptions"
-        android:text="@string/options_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<!--    <Button-->
+<!--        android:id="@+id/btnOptions"-->
+<!--        android:text="@string/options_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
 </LinearLayout>

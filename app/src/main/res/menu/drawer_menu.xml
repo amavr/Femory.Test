@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/tasksFragment"
+    <item android:id="@+id/hostNavFragment"
         android:title="@string/tasks_name"
         android:icon="@drawable/ic_done_all_black_24dp"/>
-    <item android:id="@+id/usersFragment"
-        android:title="@string/users_name"
-        android:icon="@drawable/ic_group_black_24dp"/>
+<!--    <item android:id="@+id/usersFragment"-->
+<!--        android:title="@string/users_name"-->
+<!--        android:icon="@drawable/ic_group_black_24dp"/>-->
     <item android:id="@+id/optionsFragment"
         android:title="@string/options_name"
         android:icon="@drawable/ic_menu_black_24dp"/>

@@ -42,8 +42,4 @@
         app:itemIconTint="@color/bnv_tab_item_foreground"
         app:menu="@menu/drawer_menu" />
 
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottom_nav"-->
-<!--        app:menu="@menu/drawer_menu" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

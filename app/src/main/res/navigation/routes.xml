@@ -7,12 +7,9 @@
 
     <fragment
         android:id="@+id/hostNavFragment"
-        android:name="com.amavr.femory.NavFragment"
+        android:name="com.amavr.femory.MainFragment"
         android:label="Меню"
-        tools:layout="@layout/fragment_nav" >
-        <action
-            android:id="@+id/action_navFragment_to_tasksFragment"
-            app:destination="@id/tasksFragment" />
+        tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_navFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
@@ -25,11 +22,6 @@
         android:name="com.amavr.femory.UsersFragment"
         android:label="@string/users_name"
         tools:layout="@layout/fragment_users" />
-    <fragment
-        android:id="@+id/tasksFragment"
-        android:name="com.amavr.femory.TasksFragment"
-        android:label="@string/tasks_name"
-        tools:layout="@layout/fragment_tasks" />
     <fragment
         android:id="@+id/optionsFragment"
         android:name="com.amavr.femory.OptionsFragment"

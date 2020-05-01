@@ -11,8 +11,12 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import com.amavr.tools.NotificationID;
+import com.amavr.tools.XMem;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Random;
 
 public class MsgService extends FirebaseMessagingService {
 
@@ -37,9 +41,12 @@ public class MsgService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, "common")
+                new NotificationCompat.Builder(this, getString(R.string.channel_id))
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setContentTitle("FCM Message")
                 .setContentText(messageBody)
@@ -47,9 +54,8 @@ public class MsgService extends FirebaseMessagingService {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        int id = NotificationID.getID();
+        notificationManager.notify( id, notificationBuilder.build());
+        Log.d(TAG, String.format("sent notification id: %s", id));
     }
 }

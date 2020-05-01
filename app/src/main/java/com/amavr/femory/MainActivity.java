@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import com.amavr.tools.XMem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,9 +34,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        XMem.create(getApplication());
+        Log.d(TAG, String.format("register token: %s", XMem.getInstance().getTag("a-token")));
+
         FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
-        if(fbu == null){
+        if(1 == 1 || fbu == null){
             goToAuth();
+        }
+        else{
+            Log.d(TAG, String.format("register token: %s", fbu.getIdToken(false)));
         }
 
         NavController navController = Navigation.findNavController(this, R.id.hostNavFragment);

@@ -5,26 +5,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainFragment">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello! I`m the main fragment"/>
-<!--    <Button-->
-<!--        android:id="@+id/btnTasks"-->
-<!--        android:text="@string/tasks_name"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+        android:text="Hello! I`m the main fragment" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btnUsers"-->
-<!--        android:text="@string/users_name"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+    <Button
+        android:id="@+id/btnChange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btnOptions"-->
-<!--        android:text="@string/options_name"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+    <ExpandableListView
+        android:id="@+id/groupedList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#000000"
+        android:dividerHeight="1dp" />
+    <!--    <Button-->
+    <!--        android:id="@+id/btnTasks"-->
+    <!--        android:text="@string/tasks_name"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btnUsers"-->
+    <!--        android:text="@string/users_name"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content" />-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btnOptions"-->
+    <!--        android:text="@string/options_name"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content" />-->
 
 </LinearLayout>

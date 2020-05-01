@@ -95,6 +95,7 @@ public class AuthActivity extends AppCompatActivity {
 
             try {
                 mGoogleAccount = task.getResult(ApiException.class);
+                XMem.getInstance().setTag("a-token", null);
                 Log.d(TAG, String.format("Selected account=%s", mGoogleAccount.getAccount().name));
 
                 firebaseAuthWithGoogle(mGoogleAccount);
@@ -111,9 +112,11 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "Google account ID: " + account.getId());
+        String token = account.getIdToken();
+//        Log.d(TAG, "Google account ID: " + account.getId());
+        XMem.getInstance().setTag("a-token", token);
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
 //        Log.d(TAG, "Auth credential: " + gson.toJson(credential));
 
         mAuth.signInWithCredential(credential)

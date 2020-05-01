@@ -5,4 +5,7 @@
     <string name="tasks_name">Напоминалки</string>
     <string name="users_name">Пользователи</string>
     <string name="options_name">Настройки</string>
+    <string name="channel_id">com.amavr.femory</string>
+    <string name="channel_name">Product list changed</string>
+    <string name="channel_description">Уведомление об изменении списка товаров</string>
 </resources>

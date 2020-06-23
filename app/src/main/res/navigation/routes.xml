@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/hostNavFragment"
-        android:name="com.amavr.femory.MainFragment"
+        android:name="com.amavr.femory.ListFragment"
         android:label="Меню"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_navFragment_to_usersFragment"
             app:destination="@id/usersFragment" />

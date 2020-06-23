@@ -1,28 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello! I`m the main fragment" />
-
-    <Button
-        android:id="@+id/btnChange"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Change" />
-
     <ExpandableListView
         android:id="@+id/groupedList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:divider="#000000"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupedList">
+
+        <Button
+            android:id="@+id/btnTestDB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test DB" />
+
+        <Button
+            android:id="@+id/btnTestNotify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify" />
+
+        <Button
+            android:id="@+id/btnTestLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go invite" />
+    </LinearLayout>
+
     <!--    <Button-->
     <!--        android:id="@+id/btnTasks"-->
     <!--        android:text="@string/tasks_name"-->
@@ -41,4 +64,4 @@
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content" />-->
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

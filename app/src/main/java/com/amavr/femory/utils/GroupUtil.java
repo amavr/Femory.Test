@@ -3,8 +3,12 @@ package com.amavr.femory.utils;
 import android.app.Application;
 import android.util.Log;
 
+import com.amavr.femory.models.GroupInfo;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class GroupUtil {
 
@@ -23,5 +27,16 @@ public class GroupUtil {
             Log.e("EPRST", ex.getMessage());
             return null;
         }
+    }
+
+    public static List<GroupInfo> loadGroups(Application app, String assetName){
+        String json = loadTexts(app, assetName);
+        Gson gson = new Gson();
+        DataInfo di = gson.fromJson(json, DataInfo.class);
+        return di.groups;
+    }
+
+    public class DataInfo{
+        public List<GroupInfo> groups;
     }
 }

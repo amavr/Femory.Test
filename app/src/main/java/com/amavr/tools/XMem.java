@@ -5,7 +5,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.amavr.femory.models.GroupInfo;
+import com.amavr.femory.models.ItemInfo;
+import com.amavr.femory.utils.GroupUtil;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class XMem {
 
@@ -17,6 +24,8 @@ public class XMem {
     private SharedPreferences prefs = null;
     private Application app;
     private HashMap<String, Object> dic;
+    private List<GroupInfo> groups;
+    private int groupIndex = 0;
 
     public static XMem create(Application A){
         if (instance == null) {
@@ -24,6 +33,7 @@ public class XMem {
             instance.app = A;
             instance.prefs = A.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
             instance.dic = new HashMap<String, Object>();
+            instance.loadGroups();
             Log.d(TAG, "XMem created");
         }
         return instance;
@@ -40,6 +50,37 @@ public class XMem {
     public void setTag(String key, Object value){
         dic.put(key, value);
     }
+
+    private void loadGroups(){
+        try {
+            groups = GroupUtil.loadGroups(app, "data.json");
+            Log.d(TAG, String.format("groups: %s", groups.size()));
+        }
+        catch(Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+    }
+
+    public List<String> getGroupsNames(){
+        List<String> names = new ArrayList<String>();
+        for(GroupInfo g : groups) names.add(g.getName());
+        return names;
+    }
+
+    public List<GroupInfo> getGroups(){
+        return groups;
+    }
+
+    public void setGroup(int index){
+        this.groupIndex = index;
+    }
+
+    public List<ItemInfo> getItems(){
+        List<ItemInfo> items = new ArrayList<ItemInfo>();
+        items.addAll(groups.get(groupIndex).getItems());
+        return items;
+    }
+
 
     public Object getGoogleClient(){
         return getTag("google-client");

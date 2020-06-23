@@ -10,8 +10,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -19,14 +21,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import com.amavr.tools.NotificationID;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 
 
 /**
@@ -35,18 +41,14 @@ import java.util.Random;
  * create an instance of this fragment.
  */
 public class MainFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     private static final String TAG = "XDBG.main-fragment";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private NavController nc;
+
+    private FirebaseFirestore mFirestore;
+    private Query mQueryUsers;
+    private Query mQueryGroups;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -58,17 +60,13 @@ public class MainFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment NavFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
+    public static MainFragment newInstance() {
         Log.d(TAG, "newInstance");
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -77,25 +75,68 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        FirebaseFirestore.setLoggingEnabled(true);
+        mFirestore = FirebaseFirestore.getInstance();
+
+        mQueryUsers = mFirestore.collection("users")
+                .orderBy("name", Query.Direction.ASCENDING)
+                .limit(100);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
         // Inflate the layout for this fragment
         View navView = inflater.inflate(R.layout.fragment_main, container, false);
         nc = NavHostFragment.findNavController(this);
 
-        navView.findViewById(R.id.btnChange).setOnClickListener(new View.OnClickListener() {
+        navView.findViewById(R.id.btnTestNotify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick");
+                Log.d(TAG, "onClick btnTestNotify");
                 sendNotification("abc");
+            }
+        });
+
+        navView.findViewById(R.id.btnTestDB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick btnTestDB");
+                mQueryUsers.get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot snapshots) {
+                                if(snapshots.isEmpty()){
+                                    Log.d(TAG, "no users found");
+                                }
+                                else{
+                                    Log.d(TAG, String.format("%s users found", snapshots.getDocuments().size()));
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+            }
+        });
+
+        navView.findViewById(R.id.btnTestLink).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick btnTestLink");
+                InviteFragment ifr = new InviteFragment();
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.hostNavFragment, ifr, "findThisFrament")
+                        .addToBackStack(null)
+//                        .add(R.id.hostNavFragment, ifr)
+                        .commit();
             }
         });
 

@@ -8,4 +8,15 @@
     <string name="channel_id">com.amavr.femory</string>
     <string name="channel_name">Product list changed</string>
     <string name="channel_description">Уведомление об изменении списка товаров</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Here invite will be shown</string>
+
+
+    <string-array name="groups">
+        <item>Семья</item>
+        <item>Рыба</item>
+        <item>Личный</item>
+    </string-array>
+
 </resources>

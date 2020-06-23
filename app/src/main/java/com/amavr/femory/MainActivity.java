@@ -2,13 +2,20 @@ package com.amavr.femory;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.ScrollingTabContainerView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import com.amavr.tools.XMem;
@@ -21,13 +28,18 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "XDBG.main";
+
+    private Gson gson = new Gson();
+
     private String token = "";
 
-    private Button btnTest;
-    private Gson gson = new Gson();
+    private Toolbar mToolbar;
+    private AppCompatSpinner mSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +47,42 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         XMem.create(getApplication());
+
+        mToolbar = findViewById(R.id.toolbar);
+        mSpinner = findViewById(R.id.spinner_groups);
+
+        setSupportActionBar(mToolbar);
+
+        List<String> group_names = XMem.getInstance().getGroupsNames();
+        ArrayAdapter<String> adp_group = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                group_names);
+        adp_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(adp_group);
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                XMem.getInstance().setGroup(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        Log.d(TAG, String.format("data: %s", data));
+
         Log.d(TAG, String.format("register token: %s", XMem.getInstance().getTag("a-token")));
 
         FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
-        if(1 == 1 || fbu == null){
+        if(fbu == null){
             goToAuth();
         }
         else{
@@ -46,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         NavController navController = Navigation.findNavController(this, R.id.hostNavFragment);
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
-        NavigationUI.setupWithNavController(bottomNav, navController);
+//        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+//        NavigationUI.setupWithNavController(bottomNav, navController);
 
 //        btnTest = (Button)findViewById(R.id.btnTest);
 //        btnTest.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        getToken();
     }
+
+
 
     private void goToAuth(){
         Intent intent = new Intent(this, AuthActivity.class);
